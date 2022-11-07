@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/cassa/static/css/main.75472670.css",
+    "main.js": "/cassa/static/js/main.a7b38633.js",
+    "static/js/787.855cca91.chunk.js": "/cassa/static/js/787.855cca91.chunk.js",
+    "index.html": "/cassa/index.html",
+    "main.75472670.css.map": "/cassa/static/css/main.75472670.css.map",
+    "main.a7b38633.js.map": "/cassa/static/js/main.a7b38633.js.map",
+    "787.855cca91.chunk.js.map": "/cassa/static/js/787.855cca91.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.75472670.css",
+    "static/js/main.a7b38633.js"
+  ]
+}
