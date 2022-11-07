@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/cassa/static/css/main.75472670.css",
-    "main.js": "/cassa/static/js/main.a7b38633.js",
+    "main.js": "/cassa/static/js/main.971cef59.js",
     "static/js/787.855cca91.chunk.js": "/cassa/static/js/787.855cca91.chunk.js",
+    "static/media/bizerba-logo.svg": "/cassa/static/media/bizerba-logo.6874dcb935d9a8d1b7ffa192b45d57c4.svg",
     "index.html": "/cassa/index.html",
     "main.75472670.css.map": "/cassa/static/css/main.75472670.css.map",
-    "main.a7b38633.js.map": "/cassa/static/js/main.a7b38633.js.map",
+    "main.971cef59.js.map": "/cassa/static/js/main.971cef59.js.map",
     "787.855cca91.chunk.js.map": "/cassa/static/js/787.855cca91.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.75472670.css",
-    "static/js/main.a7b38633.js"
+    "static/js/main.971cef59.js"
   ]
 }
