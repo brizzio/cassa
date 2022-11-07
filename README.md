@@ -8,6 +8,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 https://dev.to/ansh47/react-button-component-with-an-icon-b4l
 
+### DEPLOY TO GITHUB PAGES
+
+https://blog.logrocket.com/deploying-react-apps-github-pages/
+
 
 ## Available Scripts
 
