@@ -1,0 +1,36 @@
+.button {
+    display:flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding:15px;
+    /* background: #ABABAB; */
+    border:solid;
+    border-width: medium;
+    border-radius: 10px;
+    border-color: #5D6174;
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: 700;
+    cursor:pointer;
+}
+
+.button:hover,
+.button:active {
+    background: #0b89a8;
+}
+
+.button__text,
+.button__icon {
+
+    display:inline-flex;
+    align-items: center;
+    padding: 0 8px;
+    color: #5D6174;
+    height: 100%;
+}
+
+.button__icon {
+    font-size: 2em;
+    /* background: rgba(0, 0, 0, 0.1); */
+}

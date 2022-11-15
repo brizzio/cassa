@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 let Grid = styled.div`
-
+  grid-column:1;
   display: grid;
   grid-template-columns: 70% 30%;
   grid-template-rows: 100%;

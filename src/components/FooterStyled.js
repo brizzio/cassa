@@ -30,7 +30,7 @@ function FooterStyled() {
   return (
     <Wrapper>
         <MessageStyled>
-            <div><i class="fa fa-spinner fa-spin"></i></div>
+            <div><i className="fa fa-spinner fa-spin"></i></div>
             <div>Scannerizzando prodotti...</div>
         </MessageStyled>
         <div style={{

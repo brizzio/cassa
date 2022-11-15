@@ -3,12 +3,12 @@ import React from "react";
 import classes from './ScrollBarButton.module.css'
 
 const ScrollBarButton = (props) => {
-    console.log(classes)
+    //console.log(classes)
 
     const cn = props.className?classes[props.className]:""
     const col = props.color?{color:props.color}:{color:"#5D6174"}
-    console.log(`${classes.button} ${cn}`)
-    console.log(col)
+    //console.log(`${classes.button} ${cn}`)
+    //console.log(col)
     
     return (
         <button

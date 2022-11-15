@@ -3,12 +3,12 @@ import React from "react";
 import classes from './ActionButton.module.css'
 
 const ActionButton = (props) => {
-    console.log(classes)
+    //console.log(classes)
 
     const cn = props.className?classes[props.className]:""
     const col = props.color?{color:props.color}:{color:"#5D6174"}
-    console.log(`${classes.button} ${cn}`)
-    console.log(col)
+    //console.log(`${classes.button} ${cn}`)
+    //console.log(col)
     
     return (
         <button

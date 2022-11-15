@@ -1,20 +1,22 @@
-import React, { Children } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import SideButton from './SideButton/SideButton'
 import ArrowUpSVG from './icons/ArrowUpSVG'
 import Erase from './icons/EraseSVG'
 import Bag from './icons/BagSVG'
+import DarkThemeButton from './utils/DarkThemeButton'
+import ModalButton from './utils/ModalButton'
 
 
 let Grid = styled.div`
-
+  grid-column:1;
   display: grid;
   grid-template-columns: 80% 20%;
   grid-template-rows: 100%;
   gap: 0%;
-  //border-style:solid;
+  border-style:solid;
   border-color:yellowgreen;
-  min-height:120%;
+  min-height:100%;
  
 
 ` 
@@ -204,6 +206,9 @@ const Button = (props)=>{
 )
 }
 
+
+
+
 function LeftCalculatorStyled() {
   return (
     <Grid>
@@ -238,15 +243,13 @@ function LeftCalculatorStyled() {
           icon="fa-solid fa-lock" //fa-arrow-right-to-bracket
         />
       </ButtonContainer>
-      <ButtonContainer> <SideButton 
-          text="BLOCCA"
-          icon="fa-solid fa-lock" //fa-arrow-right-to-bracket
+      <ButtonContainer> <ModalButton 
+          text="MODAL"
+          color="#ABABAB" //fa-arrow-right-to-bracket
         />
       </ButtonContainer>
-      <ButtonContainer> <SideButton 
-          text="BLOCCA"
-          icon="fa-solid fa-lock" //fa-arrow-right-to-bracket
-        />
+      <ButtonContainer>
+         <DarkThemeButton />
       </ButtonContainer>
     </SideBarContainer>
     

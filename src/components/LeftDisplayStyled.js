@@ -5,12 +5,12 @@ import ScaleSVG from './icons/ScaleSVG'
 import BagSVG from './icons/BagSVG'
 
 let Grid = styled.div`
-
+  grid-column:1;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 30% 40% 30%;
   gap: 0%;
-  min-height:95%;
+  min-height:100%;
  
 
 ` 
@@ -48,11 +48,11 @@ const ScannerResult = ()=>{
       color:white;
 
       .product {
-        font-size: 2rem;
+        font-size: 1.6em;
       }
 
       .upc {
-        font-size: 0.8 rem;
+        font-size: 0.8 em;
       }
     `
 
@@ -60,7 +60,7 @@ const ScannerResult = ()=>{
       display:block;
       align-items:center;
       color:white;
-      font-size: 2.5rem;
+      font-size: 2em;
 
     `
 
@@ -110,7 +110,7 @@ const Totals = () => {
       justify-content: center;
       align-items:center;
       gap:15px;
-      font-size: 30px;
+      font-size: 25px;
       
     }
 
@@ -127,10 +127,13 @@ const Totals = () => {
 
   const TotalsWrapper = styled.div`
   
-  
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    height:100%;
     color:white;
     .pview {
-      font-size: 40px;
+      font-size: 30px;
     }
 
   `
