@@ -71,7 +71,7 @@ function App() {
 
 const ApplicationContainer = ({children})=>{
   
-  const bgColor = useCustomTheme()?'#333': '#CCC'
+  const bgColor = useCustomTheme()?'#333': '#ffffff'
 
   const AppStyledDiv = styled.div`
 

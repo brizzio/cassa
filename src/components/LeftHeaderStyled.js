@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import img from '../images/coopLogo.png'
 
 
 
@@ -121,7 +122,7 @@ function LeftHeaderStyled() {
    
    <Wrapper>
        
-        <Logo><img className='pic' src='/assets/images/coopLogo.png' alt=''/></Logo>
+        <Logo><img className='pic' src={img} alt=''/></Logo>
         
         <CardWrapper>
           <Card title='Negozio' value='001'/>
