@@ -6,6 +6,8 @@ import Erase from './icons/EraseSVG'
 import Bag from './icons/BagSVG'
 import DarkThemeButton from './utils/DarkThemeButton'
 import ModalButton from './utils/ModalButton'
+import LoginModal from './PopUp/LoginModal'
+import { useAuth , useAuthUpdate } from '../context/AuthContext'
 
 
 let Grid = styled.div`
@@ -331,7 +333,15 @@ const Button = (props)=>{
 
 
 
+
 function LeftCalculatorStyled() {
+  
+  const access = useAuthUpdate()
+
+const auth = useAuth()
+
+
+
   return (
     <Grid>
     <KeyboardGrid>
@@ -355,15 +365,16 @@ function LeftCalculatorStyled() {
     </KeyboardGrid>
     <SideBarContainer>
       <ButtonContainer>
-        <SideButton 
-          text="BLOCCA"
-          icon="fa-solid fa-lock" //fa-arrow-right-to-bracket
-        />
+        <LoginModal />
       </ButtonContainer>
-      <ButtonContainer> <SideButton 
-          text="BLOCCA"
-          icon="fa-solid fa-lock" //fa-arrow-right-to-bracket
-        />
+      <ButtonContainer> 
+        <button onClick={
+          () =>{
+            window.alert("logout")
+            access()
+            window.alert(auth)
+          }
+        }>Logout</button>
       </ButtonContainer>
       <ButtonContainer> <ModalButton 
           text="MODAL"

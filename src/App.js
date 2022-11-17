@@ -10,6 +10,7 @@ import FooterStyled from './components/FooterStyled';
 
 import { CustomThemeProvider, useCustomTheme} from './context/CustomThemeContext'
 import { ModalProvider , useModal} from './context/ModalContext'
+import { AuthProvider} from './context/AuthContext'
 
 
 
@@ -21,48 +22,49 @@ function App() {
     
     <CustomThemeProvider>
       <ModalProvider>
+        <AuthProvider>
         
-        <ApplicationContainer>
+                <ApplicationContainer>
 
-          <HeaderContainer>
-            <HeaderStyled />
-          </HeaderContainer>
+                  <HeaderContainer>
+                    <HeaderStyled />
+                  </HeaderContainer>
 
-          <MainConteiner>
+                  <MainConteiner>
 
-            <MainGrid>
+                    <MainGrid>
 
-                <LeftConteiner>
-                  <LeftHeaderConteiner>
-                    <LeftHeaderStyled />
-                  </LeftHeaderConteiner>
-                  <LeftContentConteiner>
-                    <LeftContentStyled />
-                  </LeftContentConteiner>
-                  <LeftDisplayConteiner>
-                    <LeftDisplayStyled />
-                  </LeftDisplayConteiner>
-                  <LeftCalculatorConteiner>
-                    <LeftCalculatorStyled />
-                  </LeftCalculatorConteiner>
-                </LeftConteiner>
-                <RightConteiner>
-                  <CommandConteiner>
-                    <RightCommandStyled />
-                  </CommandConteiner>
-                  <SideScrollBarConteiner>
-                    <RightSideScrollBarStyled />
-                  </SideScrollBarConteiner>
-                </RightConteiner>
-            </MainGrid>
-            
-          </MainConteiner>
-          
-          <FooterConteiner><FooterStyled /></FooterConteiner>
+                        <LeftConteiner>
+                          <LeftHeaderConteiner>
+                            <LeftHeaderStyled />
+                          </LeftHeaderConteiner>
+                          <LeftContentConteiner>
+                            <LeftContentStyled />
+                          </LeftContentConteiner>
+                          <LeftDisplayConteiner>
+                            <LeftDisplayStyled />
+                          </LeftDisplayConteiner>
+                          <LeftCalculatorConteiner>
+                            <LeftCalculatorStyled />
+                          </LeftCalculatorConteiner>
+                        </LeftConteiner>
+                        <RightConteiner>
+                          <CommandConteiner>
+                            <RightCommandStyled />
+                          </CommandConteiner>
+                          <SideScrollBarConteiner>
+                            <RightSideScrollBarStyled />
+                          </SideScrollBarConteiner>
+                        </RightConteiner>
+                    </MainGrid>
+                    
+                  </MainConteiner>
+                  
+                  <FooterConteiner><FooterStyled /></FooterConteiner>
 
-        </ApplicationContainer>
-
-        </ModalProvider>
+                </ApplicationContainer>
+        </AuthProvider>
+      </ModalProvider>
     </CustomThemeProvider>
     
   );
