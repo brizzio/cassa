@@ -371,8 +371,7 @@ const auth = useAuth()
         <button onClick={
           () =>{
             window.alert("logout")
-            access()
-            window.alert(auth)
+            access.logout()
           }
         }>Logout</button>
       </ButtonContainer>

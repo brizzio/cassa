@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {ReactComponent as Logo} from './icons/bizerba-logo.svg'
+import Session from './Session'
 
 
 const Wrapper = styled.div`
@@ -32,6 +33,7 @@ function FooterStyled() {
         <MessageStyled>
             <div><i className="fa fa-spinner fa-spin"></i></div>
             <div>Scannerizzando prodotti...</div>
+            <Session />
         </MessageStyled>
         <div style={{
           display:"flex",

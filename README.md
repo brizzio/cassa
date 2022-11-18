@@ -13,6 +13,64 @@ https://dev.to/ansh47/react-button-component-with-an-icon-b4l
 https://blog.logrocket.com/deploying-react-apps-github-pages/
 
 
+### react context
+
+https://www.pluralsight.com/guides/how-to-use-react-context-to-share-data-between-components
+
+```
+import { useContext, useEffect, useState }, React from "react"
+import { ReferenceDataContext } from "./ReferenceDataContext"
+import axios from "axios"
+
+const Main = () => {
+
+  const [isLoading, setIsLoading] = useState(false);
+  const { unicornTypes, setUnicornTypes } = useContext(ReferenceDataContext);
+
+    useEffect(() => {
+      setIsLoading(true)
+      axios.get("PATH_TO_THE_API")
+        .then(response => response.data)
+        .then(setUnicornTypes)
+        .finally(() => setIsLoading(false))
+    }, [axios, setUnicornTypes])
+
+    const renderTypesList = () => {
+      unicornTypes.map(type => <li>{ type }</li>)
+    }
+
+    return (
+      <>
+        {isLoading && <p>Loading...</p>}
+        { !isLoading && (
+          <ul>
+            {renderTypesList()}
+          </ul>
+        ) }
+      </>
+    )
+}
+
+export default Main
+
+```
+
+## IMMER
+
+https://beta.reactjs.org/learn/updating-objects-in-state
+
+How does Immer work?
+
+Hide Details
+The draft provided by Immer is a special type of object, called a Proxy, that “records” what you do with it. This is why you can mutate it freely as much as you like! Under the hood, Immer figures out which parts of the draft have been changed, and produces a completely new object that contains your edits.
+
+To try Immer:
+
+Add use-immer to your package.json as a dependency
+Run npm install
+Then replace import { useState } from 'react' with import { useImmer } from 'use-immer'
+Here is the above example converted to Immer:
+
 ## Available Scripts
 
 

@@ -16,7 +16,7 @@ function Login() {
 
   // React States
   const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(auth);
 
   // User Login info
   const database = [
@@ -31,8 +31,8 @@ function Login() {
   ];
 
   const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
+    uname: "utente invalido",
+    pass: "password invalida"
   };
 
   const handleSubmit = (event) => {
@@ -52,7 +52,7 @@ function Login() {
       } else {
         setIsSubmitted(true);
 
-        access()
+        access.login(uname.value)
       }
     } else {
       // Username not found
@@ -71,7 +71,7 @@ function Login() {
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label>Username </label>
+          <label>Utente </label>
           <input type="text" name="uname" required />
           {renderErrorMessage("uname")}
         </div>
@@ -90,8 +90,8 @@ function Login() {
   return (
     <div className="app">
       <div className="login-form">
-        <div className="title">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+        <div className="title">Accesso al Cassa</div>
+        {isSubmitted ? <div>L'utente ha effettuato correttamente l'accesso</div> : renderForm}
       </div>
     </div>
   );
