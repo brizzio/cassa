@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ScrollButton from './ScrollBarButton/ScrollBarButton'
+import ProductFinder from './ProductFinder'
 
 const Wrapper = styled.div`
 
@@ -23,11 +24,7 @@ function RightSideScrollBarStyled() {
   return (
     <Wrapper>
       <BtnDiv>
-      <ScrollButton
-          text="NAM"
-          icon="fa-solid fa-caret-right" //fa-arrow-right-to-bracket
-          color=""
-        />
+      <ProductFinder/>
       </BtnDiv>
       <BtnDiv>
       <ScrollButton

@@ -3,7 +3,7 @@ import { useAuth, useAuthUpdate } from "../../context/AuthContext";
 
 //import "./styles.css";
 
-function Login() {
+function Login(props) {
 
   const auth = useAuth()
 
@@ -22,11 +22,13 @@ function Login() {
   const database = [
     {
       username: "user1",
-      password: "pass1"
+      password: "pass1",
+      employee_code:2314
     },
     {
       username: "user2",
-      password: "pass2"
+      password: "pass2",
+      employee_code:2222
     }
   ];
 
@@ -52,7 +54,8 @@ function Login() {
       } else {
         setIsSubmitted(true);
 
-        access.login(uname.value)
+        access.login({uname:userData.username, employee_code:userData.employee_code})
+        
       }
     } else {
       // Username not found

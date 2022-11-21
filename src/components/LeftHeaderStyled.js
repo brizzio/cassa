@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import img from '../images/coopLogo.png'
+import { useAuthUpdate } from '../context/AuthContext'
 
 
 
@@ -118,6 +119,11 @@ const Separator = function(){
 
 
 function LeftHeaderStyled() {
+
+  const user = useAuthUpdate().user
+
+  const code = user.employee_code?user.employee_code:'0000'
+
   return (
    
    <Wrapper>
@@ -129,7 +135,7 @@ function LeftHeaderStyled() {
           <Separator />
           <Card title='Cassa' value='056'/>
           <Separator />
-          <Card title='Operatore' value='2314'/>
+          <Card title='Operatore' value={code}/>
         </CardWrapper>
         
     </Wrapper>

@@ -14,6 +14,7 @@ const ScrollBarButton = (props) => {
         <button
             type={props.type || "button"}
             className={`${classes.button} ${cn}`}
+            
             onClick = {props.onClick}
             disabled={props.disabled}
         >

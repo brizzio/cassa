@@ -55,6 +55,96 @@ export default Main
 
 ```
 
+### https://linguinecode.com/post/get-child-component-state-from-parent-component
+
+
+The method above covers how to pass the child state over a click event.
+
+
+But what about when input field changes?
+
+We sure can do that as well! Let’s take a look at how.
+
+
+class ChildComponent extends React.Component {
+
+  state = {
+    username: '',
+    password: '',
+  }
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value }, () => {
+      if (this.props.onChange) {
+        this.props.onChange(this.state);
+      }
+    })
+  };
+
+  render() {
+    return (
+      <>
+        <div>
+          <div>Username:</div>
+          <input name="username" onChange={this.handleChange} />
+        </div>
+        <br />
+        <div>
+          <div>Password:</div>
+          <input name="password" onChange={this.handleChange} />
+        </div>
+        <br />
+        <div>
+          <button onClick={this.handleSubmit}>Submit</button>
+        </div>
+      </>
+    );
+  }
+}
+
+
+
+Get state value on React useEffect hook
+Here’s how we can pass the state to the parent component with the React
+
+function Parent() {
+
+  const eventhandler = data => console.log(data)
+
+  return <ChildComponent onChange={eventhandler} />;
+}
+
+
+function ChildComponent(props) {
+
+  const [formData, setFormData] = React.useState({ username: '', password: '' });
+
+  const handleChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  React.useEffect(() => {
+    if (props.onChange) {
+      props.onChange(formData)
+    }
+  }, [formData.username, formData.password])
+
+  return (
+    <>
+      <div>
+        <div>Username:</div>
+        <input name="username" onChange={handleChange} />
+      </div>
+      <br />
+      <div>
+        <div>Password:</div>
+        <input name="password" onChange={handleChange} />
+      </div>
+      <br />
+    </>
+  );
+}
+
+
+
 ## IMMER
 
 https://beta.reactjs.org/learn/updating-objects-in-state

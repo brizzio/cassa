@@ -15,7 +15,8 @@ export function useAuthUpdate(){
 const userModel = {
     id:'',
     uname:'',
-    email:''
+    email:'',
+    employee_code:''
 }
 
 const sessionModel = {
@@ -39,7 +40,7 @@ export function AuthProvider({ children }) {
         setAuthenticated(true)
         setLoggedUser({
             ...loggedUser,
-            uname: user
+            ...user
         })
 
         setSession({

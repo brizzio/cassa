@@ -13,7 +13,6 @@ import { ModalProvider , useModal} from './context/ModalContext'
 import { AuthProvider} from './context/AuthContext'
 
 
-
 function App() {
 
   
