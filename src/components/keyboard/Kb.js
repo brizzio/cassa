@@ -5,17 +5,29 @@
  * https://codesandbox.io/s/github/simple-keyboard/multiple-inputs-wrapper-router/tree/master/?file=/src/Home.js
  */
 import React, { useRef, useState } from "react";
+import styled from "styled-components";
 
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 
 import "../../index.css";
 
+const InputStyled = styled.input`
+  border:solid thin;
+  border-radius:15px;
+  background-color:white;
+  
+  font-size:1.5em;
+  color:lightslategray;
+`
+
 export default function Kb(props) {
 
    const [input, setInput] = useState("");
   const [layout, setLayout] = useState("default");
   const keyboard = useRef();
+
+  const placeholder = props.placeholder || "..."
 
   const onChange = input => {
     setInput(input);
@@ -47,11 +59,13 @@ export default function Kb(props) {
 
   return (
     <div className="App">
-      <input
-        value={input}
-        placeholder={"Tap on the virtual keyboard to start"}
-        onChange={onChangeInput}
+
+      <InputStyled
+          value={input}
+          placeholder={placeholder}
+          onChange={onChangeInput}
       />
+      
       <Keyboard
         keyboardRef={r => (keyboard.current = r)}
         layoutName={layout}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import { useStore } from '../context/Store';
 
 import Modal from 'react-bootstrap/Modal';
 import ScrollBarButton from './ScrollBarButton/ScrollBarButton';
@@ -13,29 +14,82 @@ export default function ProductFinder() {
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {setShow(false); setQuery("")}
   const handleShow = () => setShow(true);
 
   const [query, setQuery] = useState("")
 
 
-  const FormWrapper = styled.div`
+  const DisplayWrapper = styled.div`
   
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    flex-flow: row wrap;
+    justify-content:center;
     align-items: center;
     min-height:400px;
     max-height:400px;
-    overflow:hidden;
+    overflow-y:scroll;
+    gap:20px;
+    margin-bottom:20px;
+
+    .product {
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      margin:5px;
+      padding:5px;
+      min-height:200px;
+      width:150px;
+      border:none;
+      background-color: #f9f9f9;
+
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      border-radius: 5px; 
+    }
+
+    h6{
+      text-align:center;
+      margin-top:5px;
+    }
+
+    h3{
+      text-align:center;
+      
+    }
+
+    /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  & {
+    scrollbar-width: auto;
+    scrollbar-color: #8f54a0 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  &::-webkit-scrollbar {
+    width: 37px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #8f54a0;
+    border-radius: 15px;
+    border: 6px solid #ffffff;
+  }
     
   `
 
-    const data = new Array(30).fill().map(
+    /* const data = new Array(30).fill().map(
     (value, index) => (
     { id: index, title: `prodotto ${index}`, UPC: Math.random()*10000 }
     )
-    )
+    ) */
+
+    const data = useStore()
   
 
   return (
@@ -58,9 +112,9 @@ export default function ProductFinder() {
 
         <Modal.Body>
 
-          <FormWrapper>
+          <DisplayWrapper>
 
-          <div>
+          
             {data.filter(post => {
                 if (query === '') {
                 return post;
@@ -68,14 +122,19 @@ export default function ProductFinder() {
                 return post;
                 }
             }).map(((item) => (
-                <div key={item.id} className="post">
-                    <span>{item.title} - {item.UPC}</span>
+                <div key={item.id} className="product">
+                    <img src={item.images[0]} alt={item.title} style={{height:"80px"}}></img>
+                    <h6>{item.title}</h6>
+                    <h3>$ {item.price}</h3>
                 </div>
             )))}
-        </div>
+       
           
-          </FormWrapper>  
-          <Kb onChange={(data)=>setQuery(data)}/>
+          </DisplayWrapper>  
+          <Kb 
+          placeholder="scrivi il prodotto che stai cercando..."
+          onChange={(data)=>setQuery(data)}
+          />
           
           
          

@@ -11,6 +11,7 @@ import FooterStyled from './components/FooterStyled';
 import { CustomThemeProvider, useCustomTheme} from './context/CustomThemeContext'
 import { ModalProvider , useModal} from './context/ModalContext'
 import { AuthProvider} from './context/AuthContext'
+import { StoreProvider } from './context/Store';
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
     <CustomThemeProvider>
       <ModalProvider>
         <AuthProvider>
-        
+          <StoreProvider>
                 <ApplicationContainer>
 
                   <HeaderContainer>
@@ -62,6 +63,8 @@ function App() {
                   <FooterConteiner><FooterStyled /></FooterConteiner>
 
                 </ApplicationContainer>
+        
+          </StoreProvider>
         </AuthProvider>
       </ModalProvider>
     </CustomThemeProvider>
