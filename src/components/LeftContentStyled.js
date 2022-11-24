@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 import { useStore } from '../context/Store'
 
+import NewCartModal from '../components/PopUp/NewCartModal'
+
 
 
 
@@ -192,6 +194,7 @@ const ListComponent = (props) =>{
 function LeftContentStyled() {
 
 
+
   return (
     <Grid>
     <div>
@@ -199,7 +202,9 @@ function LeftContentStyled() {
     </div>
     <BtnContainer>
       <BtnNovo>
-        <Button onClick={useStore().open} bgColor={'#6966FF'}>Novo Cliente</Button>
+      
+        <NewCartModal /> 
+        
       </BtnNovo>
       <BtnCancella>
         <Button onClick={handleClick} bgColor={'#FF8D8D'}>Cancella</Button>

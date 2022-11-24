@@ -68,12 +68,12 @@ export function StoreProvider({ children }) {
         return day + "/" + month + "/" + year;
     }
 
-    const openCart = () =>{
+    const openCart = (form) =>{
 
         const index = carts.length++
         let oDate = new Date()
 
-        setCurrentCartItems([{}])
+        const cartItems= []
         const cartInfo = {
             id: crypto.randomUUID(),
             index:index,
@@ -84,19 +84,20 @@ export function StoreProvider({ children }) {
 
         const buyerInfo = {
             id:crypto.randomUUID(),
-            fiscalCode:"",
-            lotteryCode:"",
-            name:"",
-            address:"",
-            email:"",
-            mobile:"",
-            phone:"",
-            loyaltyCode:""
+            fiscalCode:form.taxCode,
+            lotteryCode:form.lotteryCode,
+            firstName:form.firstName,
+            lastName:form.lastName,
+            address:form.address,
+            email:form.email,
+            mobile:form.mobile,
+            phone:form.phone,
+            loyaltyCode:form.loyaltyCode
 
         }
 
         const cc = {
-                        items:currentCartItems,
+                        items:cartItems,
                         info:cartInfo,
                         buyer:buyerInfo
                     }
