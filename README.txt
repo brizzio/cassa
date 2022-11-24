@@ -55,6 +55,35 @@ export default Main
 
 ```
 
+### How to position a div scrollbar on the left hand side?
+
+
+Kind of an old question, but I thought I should throw in a method which wasn't widely available when this question was asked.
+
+You can reverse the side of the scrollbar in modern browsers using transform: scaleX(-1) on a parent <div>, then apply the same transform to reverse a child, "sleeve" element.
+
+HTML
+
+<div class="parent">
+  <div class="sleeve">
+    <!-- content -->
+  </div>
+</div>
+CSS
+
+.parent {
+  overflow: auto;
+  transform: scaleX(-1); //Reflects the parent horizontally
+}
+
+.sleeve {
+  transform: scaleX(-1); //Flips the child back to normal
+}
+Note: You may need to use an -ms-transform or -webkit-transform prefix for browsers as old as IE 9. Check CanIUse and click "show all" to see older browser requirements.
+
+
+
+
 ### https://linguinecode.com/post/get-child-component-state-from-parent-component
 
 

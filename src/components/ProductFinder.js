@@ -59,6 +59,13 @@ export default function ProductFinder() {
       
     }
 
+    button {
+      margin:0;
+      padding:0;
+      background-color:transparent !important;
+      border:none;
+    }
+
     /* ===== Scrollbar CSS ===== */
   /* Firefox */
   & {
@@ -89,8 +96,16 @@ export default function ProductFinder() {
     )
     ) */
 
-    const data = useStore()
-  
+    const store = useStore()
+    
+    const handleClick = (e) =>{
+      
+      console.log('handle click function')
+      console.log('item add function')
+      console.log(e)
+      store.addItemToCart(e)
+      handleClose()
+    }
 
   return (
     <>
@@ -115,18 +130,21 @@ export default function ProductFinder() {
           <DisplayWrapper>
 
           
-            {data.filter(post => {
+            {store.products.filter(post => {
                 if (query === '') {
                 return post;
                 } else if (post.title.toLowerCase().includes(query.toLowerCase())) {
                 return post;
                 }
             }).map(((item) => (
+              <button onClick={()=>handleClick(item)}>
                 <div key={item.id} className="product">
                     <img src={item.images[0]} alt={item.title} style={{height:"80px"}}></img>
                     <h6>{item.title}</h6>
                     <h3>$ {item.price}</h3>
                 </div>
+              </button>
+                
             )))}
        
           
@@ -139,14 +157,14 @@ export default function ProductFinder() {
           
          
         </Modal.Body>
-        <Modal.Footer>
+        {/* <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={handleClose}>
             Save Changes
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     </>
   );

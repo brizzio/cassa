@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+import { useStore } from '../context/Store'
+
+
+
+
 let Grid = styled.div`
   grid-column:1;
   display: grid;
@@ -13,6 +18,49 @@ let Grid = styled.div`
  
 
 ` 
+
+const DisplayWrapper = styled.div`
+  
+  
+  min-height:280px;
+  max-height:280px;
+  overflow-y:scroll;
+  transform: scaleX(-1);
+
+  ul {
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    list-style-type: none;
+    padding-right:20px;
+    transform: scaleX(-1);
+  
+  }
+
+  
+  /* ===== Scrollbar CSS ===== */
+/* Firefox */
+& {
+  scrollbar-width: auto;
+  scrollbar-color: #8f54a0 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+&::-webkit-scrollbar {
+  width: 37px;
+}
+
+&::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+&::-webkit-scrollbar-thumb {
+  background-color: #8f54a0;
+  border-radius: 50px;
+  border: 6px solid #ffffff;
+}
+  
+`
 
 
 let BtnContainer = styled.div`
@@ -76,47 +124,19 @@ const handleClick = (message) => {
 
 const ListComponent = (props) =>{
 
-  const items = [
-    {
-      id:1,
-      product:"Pane Bianco Naturale",
-      price:"3.56",
-      letter:"TFA"
-    },
-    {
-      id:2,
-      product:"Latte Scremato",
-      price:"3.56",
-      letter:"FA"
-    },
-    {
-      id:3,
-      product:"12 Uova Grandi",
-      price:"3.56",
-      letter:"FC"
-    },
-    {
-      id:4,
-      product:"Carta Stangnola",
-      price:"3.56",
-      letter:"C"
-    },
-    {
-      id:5,
-      product:"Coca Cola",
-      price:"3.56",
-      letter:"PR"
-    }
-  ]
+  const remove = useStore().removeItemFromCart
 
-  const [data, setData] = useState(items)
+  console.log('list component')
+  console.log(props.list)
 
+  const items = props.list
 
+  
+  const removeItem = (item) => {
 
-  const removeItem = (id) => {
+    console.log("remove " + item)
 
-    console.log("remove " + id)
-
+    remove(item)
   }
 
 
@@ -130,38 +150,33 @@ const ListComponent = (props) =>{
     `
     
 
-    const mapRows = data.map((item, index) => (
+    var mapRows = items.map((item, index) => (
         <>
             <LiStyled key={item.id} >
                 {/* Passing unique value to 'key' prop, eases process for virtual DOM to remove specific element and update HTML tree  */}
-                <span>{item.product}</span>
+                <span>{item.title}</span>
                 <span>{item.price}</span>
                 <span>{item.letter}</span>
-                <button onClick={() => removeItem(item.id)}>
+                <button onClick={() => removeItem(item)}>
                     X
                 </button>
             </LiStyled>
         </>
     ));
+    console.log('items.lenght ',items, Object.keys(items).length)
+    if(Object.keys(items).length === 1){ mapRows=<LiStyled></LiStyled>}
+
     return mapRows;
 };
 
 
   return (
 
-      <div>
-        <ul style={
-          {
-            display:"flex",
-            flexDirection:"column",
-            gap:"10px",
-            listStyleType: "none",
-            paddingRight: "20px"
-          }
-        }>
+      <DisplayWrapper>
+        <ul>
           {renderItems()}
         </ul>
-      </div>
+      </DisplayWrapper>
 
 
   )
@@ -170,15 +185,21 @@ const ListComponent = (props) =>{
 }
 
 
+
+
+
+
 function LeftContentStyled() {
+
+
   return (
     <Grid>
     <div>
-      <ListComponent />
+      <ListComponent list={useStore().currentCartItems}/>
     </div>
     <BtnContainer>
       <BtnNovo>
-        <Button onClick={handleClick} bgColor={'#6966FF'}>Novo Cliente</Button>
+        <Button onClick={useStore().open} bgColor={'#6966FF'}>Novo Cliente</Button>
       </BtnNovo>
       <BtnCancella>
         <Button onClick={handleClick} bgColor={'#FF8D8D'}>Cancella</Button>

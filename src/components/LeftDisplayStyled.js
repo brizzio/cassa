@@ -4,6 +4,9 @@ import CartSVG from './icons/CartSVG'
 import ScaleSVG from './icons/ScaleSVG'
 import BagSVG from './icons/BagSVG'
 
+import {useStore} from '../context/Store'
+import { useState } from 'react'
+
 let Grid = styled.div`
   grid-column:1;
   display: grid;
@@ -36,11 +39,12 @@ let DisplayTotals = styled.div`
 
 `
 
-const ScannerResult = ()=>{
+const ScannerResult = (props)=>{
 
-    const [ProdName, setProdName] = React.useState('Mussum Ipsum, cacilds vidis litro abertis.')
-    const [ProdUPC, setProdUPC] = React.useState('7895556847')
-    const [ProdPrice, setProdPrice] = React.useState('12,00')
+    
+    const ProdName = props.info.title
+    const ProdUPC = props.info.ean
+    const ProdPrice = (props.info.price === 0)?"":Number(props.info.price).toFixed(2)
 
     const Description = styled.div`
       display:flex;
@@ -82,12 +86,14 @@ const ScannerResult = ()=>{
 
 }
 
-const Totals = () => {
+const Totals = (props) => {
 
-  const [CartItemsCount, setCartItemsCount] = React.useState('7');
-  const [TotalWeightKg, setTotalWeightKg] = React.useState('13.5');
-  const [BagsCount, setBagsCount] = React.useState('0')
-  const [Total, setTotal] = React.useState(130.50)
+  console.log('no totals ===> ', props.summary)
+  
+  const CartItemsCount = props.summary.count;
+  const TotalWeightKg = props.summary.weight;
+  const BagsCount = props.summary.bags
+  const Total= Number(props.summary.total).toFixed(2)
 
   const Wrapper = styled.div`
   
@@ -163,7 +169,7 @@ const Totals = () => {
         </Wrapper>
        
         <TotalsWrapper>
-          <span className="pview">€ {Total.toFixed(2)}</span>
+          <span className="pview">€ {Total}</span>
         </TotalsWrapper>
     </>  
 
@@ -173,13 +179,40 @@ const Totals = () => {
 
 
 function LeftDisplayStyled() {
+
+  const list = useStore().currentCartItems
+
+  
+
+  console.log('no display')
+  console.log(list)
+
+  var item = list[list.length - 1]
+
+  const ean = (item.ean)?item.ean:'7895556869'
+
+  const info = (list.length>1)?
+  { title:item.title,
+    price:item.price,
+    ean:ean
+  }:{title:"", price:0, ean:""}
+
+  
+
+  console.log('info')
+  console.log(info)
+
+  let summary = useStore().summary()
+
+  summary=(!summary.total)?{bags:0,count:0,total:0,weight:0}:summary
+
   return (
     <Grid>
       <ScannerDisplay>
-        <ScannerResult />
+        <ScannerResult info={info} />
       </ScannerDisplay>
       <DisplayTotals>
-        <Totals />
+        <Totals summary={summary}/>
       </DisplayTotals>
     
     </Grid>

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import img from '../images/coopLogo.png'
 import { useAuthUpdate } from '../context/AuthContext'
+import { useStore } from '../context/Store'
 
 
 
@@ -10,11 +11,13 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction:row-reverse;
     justify-content: space-between;
+    align-content:center;
     align-items: center;
     padding-top:1%;
     padding-bottom:6px;
     margin-right:5%;
     margin-left:5%;
+    max-height:100%;
     
     
 `
@@ -40,8 +43,8 @@ const Card = (props) => {
 
     display: flex;
     flex-direction:column;
+    align-items:center;
     justify-content: space-around;
-    margin:0;
  
   `
 
@@ -95,6 +98,7 @@ const CardWrapper = styled.div`
     display: flex;
     flex-direction:row;
     justify-content: space-between;
+    align-content:center;
     align-items: center;
     
 `
@@ -122,6 +126,8 @@ function LeftHeaderStyled() {
 
   const user = useAuthUpdate().user
 
+  const metadata = useStore().metadata
+
   const code = user.employee_code?user.employee_code:'0000'
 
   return (
@@ -131,9 +137,9 @@ function LeftHeaderStyled() {
         <Logo><img className='pic' src={img} alt=''/></Logo>
         
         <CardWrapper>
-          <Card title='Negozio' value='001'/>
+          <Card title='Negozio' value={metadata.store}/>
           <Separator />
-          <Card title='Cassa' value='056'/>
+          <Card title='Cassa' value={metadata.cashier}/>
           <Separator />
           <Card title='Operatore' value={code}/>
         </CardWrapper>
