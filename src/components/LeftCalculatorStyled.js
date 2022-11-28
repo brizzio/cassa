@@ -373,7 +373,7 @@ const auth = useAuth()
             window.alert("logout")
             access.logout()
           }
-        }>Logout</button>
+        }>CHIUDI CASSA</button>
       </ButtonContainer>
       <ButtonContainer> <ModalButton 
           text="MODAL"

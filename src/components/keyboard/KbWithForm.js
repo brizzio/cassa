@@ -117,7 +117,7 @@ console.log(props)
           {renderErrorMessage("pass")}
         </div>
         <div className="button-container">
-          <button type="submit" />
+          <button type="submit">LOGIN</button>
         </div>
       </form>
     </div>

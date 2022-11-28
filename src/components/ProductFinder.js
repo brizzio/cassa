@@ -137,7 +137,7 @@ export default function ProductFinder() {
                 return post;
                 }
             }).map(((item) => (
-              <button onClick={()=>handleClick(item)}>
+              <button onClick={()=>handleClick(item)} key={item.id}>
                 <div key={item.id} className="product">
                     <img src={item.images[0]} alt={item.title} style={{height:"80px"}}></img>
                     <h6>{item.title}</h6>

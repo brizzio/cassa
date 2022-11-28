@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import ActionButton from './ActionButton/ActionButton'
 
+import {useStore} from '../context/Store'
+
 let Grid = styled.div`
 
   display: grid;
@@ -30,6 +32,9 @@ let ButtonActionContainer = styled.div`
 `
 
 function RightCommandStyled() {
+
+  const store = useStore()
+
   return (
     <Grid>
       <ButtonContainer>
@@ -223,12 +228,14 @@ function RightCommandStyled() {
       </ButtonContainer>
 
       <ButtonActionContainer>
-      <ActionButton 
+        <button onClick={store.close}>CHIUDI CONTO</button>
+      {/* <ActionButton 
           className="closer"
           text="CHIUDI CONTO"
           icon="fa-solid fa-caret-right" //fa-arrow-right-to-bracket
           color="white"
-        />
+          onClick={()=>store.close}
+        /> */}
       </ButtonActionContainer>
     </Grid>
   )

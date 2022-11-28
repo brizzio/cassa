@@ -78,7 +78,7 @@ export default function LoginModal() {
   return (
     <>
       <Button variant="dark" onClick={handleShow}>
-        login
+        APRIRE IL CASSA
       </Button>
 
       <Modal

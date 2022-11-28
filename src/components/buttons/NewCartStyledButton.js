@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const NewCartStyledButton = ({ type = 'button', onClick, bgColor, children }) => {
-  
-    const ButtonStyled = styled.button`
+
+const ButtonStyled = styled.button`
       margin:0;
       height:100%;
       width:100%;
-      background: ${bgColor};
+      background: ${props => props.bg };
       font-size: 20px;
       line-height: 18px;
       /* identical to box height, or 117% */
@@ -23,9 +22,12 @@ const NewCartStyledButton = ({ type = 'button', onClick, bgColor, children }) =>
   
       color: #FFFFFF;
     `
+const NewCartStyledButton = ({ type = 'button', onClick, bgColor, children }) => {
+  
+    
      
     return (
-      <ButtonStyled type={type} onClick={onClick}>
+      <ButtonStyled type={type} onClick={onClick} bg={bgColor}>
         <span className="title">{children}</span>
       </ButtonStyled>
     );

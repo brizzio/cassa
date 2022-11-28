@@ -185,17 +185,19 @@ function LeftDisplayStyled() {
   
 
   console.log('no display')
-  console.log(list)
+  console.log(list, typeof(list))
 
-  var item = list[list.length - 1]
+  var item = list?list[list.length - 1]:{}
 
-  const ean = (item.ean)?item.ean:'7895556869'
+  console.log('item>>>',item, typeof(item),item===undefined)
+  //const ean = (item.ean)?item.ean:'7895556869'
 
-  const info = (list.length>1)?
+  const info = (item===undefined)?
+  {title:"", price:0, ean:""}:
   { title:item.title,
     price:item.price,
-    ean:ean
-  }:{title:"", price:0, ean:""}
+    ean:item.ean || "78899999888"
+  }
 
   
 

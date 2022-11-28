@@ -6,19 +6,20 @@ import "react-simple-keyboard/build/css/index.css";
 import "../../index.css";
 import NewCartStyledButton from '../buttons/NewCartStyledButton';
 
-//import { useStore } from '../../context/Store';
+import { useStore } from '../../context/Store';
+import { useAuth, useAuthUpdate } from '../../context/AuthContext';
+
 
 
 export default function NewCartModal(props) {
 
-  //const store = useStore()
+  const authenticated = useAuth()
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
- 
   
   
   return (
@@ -37,9 +38,14 @@ export default function NewCartModal(props) {
           <Modal.Title>Nuovo Cliente</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-           <KeyboardComponent 
+          {!authenticated ? <div>
+            Per iniziare il registro di una nuova spesa, é necessario un utente registrato.
+          </div>
+          :
+          <KeyboardComponent 
             cancel={handleClose} 
-           />
+           /> }
+           
         </Modal.Body>
         
       </Modal>
@@ -59,10 +65,24 @@ const KeyboardComponent = (props)=>{
     const [inputName, setInputName] = useState("default");
     const keyboard = useRef();
 
+    const store = useStore()
+
+    const authenticated = useAuth();
+    const session = useAuthUpdate().session
+    const loggedUser = useAuthUpdate().user
+
     const handleSubmit = ()=>{
       console.log('submitted data')
       console.log(inputs)
-      //store.open(inputs)
+      const payload = {
+        form:inputs,
+        authenticated:authenticated,
+        session:session,
+        loggedUser:loggedUser
+
+      }
+      store.open(payload)
+      props.cancel()
       
     }
   

@@ -88,16 +88,13 @@ let BtnCancella = styled.div`
     //border-style:solid;
 `
 
-const Button = ({ type = 'button', onClick, bgColor, children }) => {
-  
-  
-  const ButtonStyled = styled.button`
+const ButtonStyled = styled.button`
     margin:0;
     height:100%;
     width:100%;
-    background: ${bgColor};
     font-size: 15.7311px;
     line-height: 18px;
+    background: ${props => props.bg };
     /* identical to box height, or 117% */
     border:none;    
     letter-spacing: -0.032em;
@@ -110,14 +107,25 @@ const Button = ({ type = 'button', onClick, bgColor, children }) => {
     
 
     color: #FFFFFF;
+  
   `
-   
+
+const Button = ({ type = 'button', onClick, bgColor, children }) => {
+  console.log('bgColor ---' , bgColor)
   return (
-    <ButtonStyled type={type} onClick={onClick}>
+    <ButtonStyled type={type} onClick={onClick} bg={bgColor}>
       <span className="title">{children}</span>
     </ButtonStyled>
   );
 };
+
+const LiStyled = styled.li`
+
+      display:grid;
+      grid-template-columns:50% 20% 20% 10%
+    
+    `
+    
 
 const handleClick = (message) => {
   console.log('button click');
@@ -129,7 +137,7 @@ const ListComponent = (props) =>{
   const remove = useStore().removeItemFromCart
 
   console.log('list component')
-  console.log(props.list)
+  console.log(props.list , Array.isArray(props.list))
 
   const items = props.list
 
@@ -144,15 +152,7 @@ const ListComponent = (props) =>{
 
   const renderItems = () => {
 
-    const LiStyled = styled.li`
-
-      display:grid;
-      grid-template-columns:50% 20% 20% 10%
-    
-    `
-    
-
-    var mapRows = items.map((item, index) => (
+    var mapRows = Array.isArray(items) ? items.map((item, index) => (
         <>
             <LiStyled key={item.id} >
                 {/* Passing unique value to 'key' prop, eases process for virtual DOM to remove specific element and update HTML tree  */}
@@ -164,9 +164,10 @@ const ListComponent = (props) =>{
                 </button>
             </LiStyled>
         </>
-    ));
-    console.log('items.lenght ',items, Object.keys(items).length)
-    if(Object.keys(items).length === 1){ mapRows=<LiStyled></LiStyled>}
+    )):<LiStyled></LiStyled>
+
+    //console.log('items.lenght ',items, Object.keys(items).length)
+    //if(Object.keys(items).length === 1){ mapRows=<LiStyled></LiStyled>}
 
     return mapRows;
 };
@@ -207,12 +208,12 @@ function LeftContentStyled() {
         
       </BtnNovo>
       <BtnCancella>
-        <Button onClick={handleClick} bgColor={'#FF8D8D'}>Cancella</Button>
+        <Button onClick={handleClick} bgColor="#FF8D8D">Cancella</Button>
       </BtnCancella>
     </BtnContainer>
     
     </Grid>
   )
 }
-
+//#FF8D8D
 export default LeftContentStyled

@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import ProductJSON from '../data/products.json'
 
+
 const StoreContext = React.createContext()
+
 
 const items = [
     {
@@ -52,12 +54,11 @@ export function useStore() {
 
 export function StoreProvider({ children }) {
 
-    
-
+   
     const [products, setProducts] = useState(ProductJSON)
     const [meta, setMeta] = useState(metadata)
     const [currentCart, setCurrentCart] = useState({})
-    const [currentCartItems, setCurrentCartItems] = useState(items)
+    const [currentCartItems, setCurrentCartItems] = useState()
 
     const [carts, setCarts] = useState([])
 
@@ -68,9 +69,9 @@ export function StoreProvider({ children }) {
         return day + "/" + month + "/" + year;
     }
 
-    const openCart = (form) =>{
+    const openCart = (data) =>{
 
-        const index = carts.length++
+        const index = carts?carts.length++:1
         let oDate = new Date()
 
         const cartItems= []
@@ -79,55 +80,94 @@ export function StoreProvider({ children }) {
             index:index,
             dateISO:oDate.toISOString(),
             date:formatDate(oDate),
-            time:oDate.toISOString().substring(11,19)
+            time:oDate.toISOString().substring(11,19),
+            active:true
         }
 
         const buyerInfo = {
             id:crypto.randomUUID(),
-            fiscalCode:form.taxCode,
-            lotteryCode:form.lotteryCode,
-            firstName:form.firstName,
-            lastName:form.lastName,
-            address:form.address,
-            email:form.email,
-            mobile:form.mobile,
-            phone:form.phone,
-            loyaltyCode:form.loyaltyCode
+            fiscalCode:data.form.taxCode,
+            lotteryCode:data.form.lotteryCode,
+            firstName:data.form.firstName,
+            lastName:data.form.lastName,
+            address:data.form.address,
+            email:data.form.email,
+            mobile:data.form.mobile,
+            phone:data.form.phone,
+            loyaltyCode:data.form.loyaltyCode
 
         }
 
         const cc = {
-                        items:cartItems,
-                        info:cartInfo,
-                        buyer:buyerInfo
-                    }
+
+            items:cartItems,
+            info:cartInfo,
+            buyer:buyerInfo,
+            authenticated:data.authenticated,
+            session:data.session,
+            loggedUser:data.loggedUser       
+        
+        }
 
         setCurrentCart(cc)
+        setCurrentCartItems([])
     
         console.log('current cart')
         console.log(cc)
+
+        console.log('todos os carrinhos')
+        console.log(carts)
+
     }
 
     const closeCart = () =>{
         
         alert("chiudere il carrello " + currentCart.info.id)
+        
+        const cart = {
+            ...currentCart,
+            items:currentCartItems,
+            total:summary()
+        }
+        cart.info.active=false
+
+        
+        
+        setCarts(current => current.concat(cart), ()=>{
+           
+            console.log('resumo', carts)
+        });
+
+        console.log('no fechamento')
+        console.log(cart)
 
     }
+
+    useEffect(() => {
+        console.log('resumo use effect ', carts);
+    }, [carts])
+    
+    
+    
     
     const handleAddItem = (item)=>{
+
         console.log('vai adicionar na lista...')
         
-        const newCart=[
-            ...currentCartItems,
+
+        setCurrentCartItems(current => current.concat(
             {
+                id: item.id, 
+                title:item.title,
+                price:item.price
+            }
+        ));
+
+        console.log({
             id: item.id, 
             title:item.title,
             price:item.price
-            }
-        ]
-
-        setCurrentCartItems(newCart)
-
+        })
     }
 
 
@@ -141,8 +181,10 @@ export function StoreProvider({ children }) {
 
     const summary = () =>{
 
-        const totalPrice = currentCartItems.map(i=>i.price).reduce((a,b)=>a+b,0);
-        const iCount = currentCartItems.length;
+        console.log('summary currentCartItems> ', currentCartItems)
+
+        const totalPrice = currentCartItems?currentCartItems.map(i=>i.price).reduce((a,b)=>a+b,0):0
+        const iCount = currentCartItems?currentCartItems.length:0
         const weight = 13.5
         const bags = 0
 
